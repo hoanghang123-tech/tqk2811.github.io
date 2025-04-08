@@ -1,7 +1,60 @@
-<!DOCTYPE html>
-<html>
+https://teams.microsoft.com/l/meetup-join/19:meeting_MTI1NjlkNGU<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solar System</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+    }
+    .planet {
+      border: 1px dashed rgba(255,255,255,0.2);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin linear infinite;
+    }
+    .dot {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg) translate(-50%, -50%); }
+      to { transform: rotate(360deg) translate(-50%, -50%); }
+    }
+  </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <div id="sun" style="position: absolute; top: 50%; left: 50%; width: 50px; height: 50px; background: yellow; border-radius: 50%; transform: translate(-50%, -50%);"></div>
+
+  <script>
+    const planets = [
+      { name: "Earth", size: 16, distance: 110, color: "blue", speed: 15 },
+      { name: "Mars", size: 13, distance: 140, color: "red", speed: 20 },
+    ];
+
+    planets.forEach((p) => {
+      const orbit = document.createElement("div");
+      orbit.className = "planet";
+      orbit.style.width = orbit.style.height = `${p.distance * 2}px`;
+      orbit.style.marginLeft = `${-p.distance}px`;
+      orbit.style.marginTop = `${-p.distance}px`;
+      orbit.style.animationDuration = `${p.speed}s`;
+
+      const dot = document.createElement("div");
+      dot.className = "dot";
+      dot.style.width = dot.style.height = `${p.size}px`;
+      dot.style.backgroundColor = p.color;
+
+      orbit.appendChild(dot);
+      document.body.appendChild(orbit);
+    });
+  </script>
 </body>
 </html>
